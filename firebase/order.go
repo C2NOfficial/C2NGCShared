@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"cloud.google.com/go/firestore"
 	"github.com/C2NOfficial/C2NGCShared/constants"
 	"github.com/C2NOfficial/C2NGCShared/models"
 )
@@ -43,20 +42,4 @@ func HandleStockReset(ctx context.Context, order *models.Order) []*models.Failed
 		}
 	}
 	return stockResetErrors
-}
-
-func GetAndIncrementOrderCounter(ctx context.Context) (int64, error) {
-    ref := FirestoreClient.Collection(constants.COLLECTION_NAME_COUNTERS).Doc("order")
-    var current int64
-    err := FirestoreClient.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
-        doc, err := tx.Get(ref)
-        if err != nil {
-            return err
-        }
-        current, _ = doc.Data()["current"].(int64)
-        return tx.Update(ref, []firestore.Update{
-            {Path: "current", Value: current + 1},
-        })
-    })
-    return current + 1, err
 }
