@@ -6,7 +6,6 @@ import (
 	"github.com/C2NOfficial/C2NGCShared/constants"
 	"github.com/C2NOfficial/C2NGCShared/models"
 	brevo_official "github.com/getbrevo/brevo-go/lib"
-	"google.golang.org/genproto/googleapis/firestore/admin/v1"
 )
 
 // helper functions for brevo payloads
