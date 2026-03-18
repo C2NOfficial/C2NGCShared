@@ -6,6 +6,7 @@ import (
 	"github.com/C2NOfficial/C2NGCShared/constants"
 	"github.com/C2NOfficial/C2NGCShared/models"
 	brevo_official "github.com/getbrevo/brevo-go/lib"
+	"google.golang.org/genproto/googleapis/firestore/admin/v1"
 )
 
 // helper functions for brevo payloads
@@ -61,10 +62,11 @@ func merge(maps ...map[string]any) map[string]any {
 
 // customer emails
 
-func ToSuccessEmailPayload(o *models.Order) *Payload {
+func ToSuccessEmailPayload(o *models.Order, adminMail string) *Payload {
 	return &Payload{
 		To:         customerTo(o),
 		TemplateID: 3,
+		BCC:        adminBCC(adminMail),
 		Params: merge(shippingParams(o), map[string]any{
 			"name":         o.CheckoutUserData.Name,
 			"order_number": o.ID,
