@@ -140,7 +140,7 @@ func ToOrderRTOUserEmailPayload(o *models.Order) *Payload {
 	}
 }
 
-func ToRefundInitiatedEmailPayload(o *models.Order, adminMail string, amount float64) *Payload {
+func ToRefundInitiatedEmailPayload(o *models.Order, adminMail string, amount string) *Payload {
 	return &Payload{
 		To:         customerTo(o),
 		BCC:        adminBCC(adminMail),
@@ -156,7 +156,7 @@ func ToRefundInitiatedEmailPayload(o *models.Order, adminMail string, amount flo
 	}
 }
 
-func ToRefundApprovedEmailPayload(o *models.Order, adminMail string, amount float64) *Payload {
+func ToRefundApprovedEmailPayload(o *models.Order, adminMail string, amount string) *Payload {
 	return &Payload{
 		To:         customerTo(o),
 		BCC:        adminBCC(adminMail),
@@ -267,7 +267,7 @@ func ToOrderReturnedToWarehouseEmailPayload(o *models.Order, adminMail string) *
 	}
 }
 
-func ToRefundRejectedEmailPayload(o *models.Order, adminMail string, amount float64) *Payload {
+func ToRefundRejectedEmailPayload(o *models.Order, adminMail string, amount string) *Payload {
 	return &Payload{
 		To:         adminTo(adminMail),
 		TemplateID: 17,
