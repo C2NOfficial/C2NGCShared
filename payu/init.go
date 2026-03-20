@@ -14,6 +14,7 @@ var (
 	Furl               string
 	Surl               string
 	PaymentCallbackURL string
+	RefundWebhookURL   string
 	initOnce           sync.Once
 )
 
@@ -25,6 +26,7 @@ func Init(projectID string) {
 			Furl = os.Getenv("PAYU_FURL")
 			Surl = os.Getenv("PAYU_SURL")
 			PaymentCallbackURL = os.Getenv("PAYU_PAYMENT_CALLBACK_URL")
+			RefundWebhookURL = os.Getenv("PAYU_REFUND_WEBHOOK_URL")
 		} else {
 			if projectID == "" {
 				log.Fatal("projectID must be provided in production")
@@ -34,6 +36,7 @@ func Init(projectID string) {
 			Furl = gcp_shared.LoadSecretsHelper(projectID, "PAYU_FURL")
 			Surl = gcp_shared.LoadSecretsHelper(projectID, "PAYU_SURL")
 			PaymentCallbackURL = gcp_shared.LoadSecretsHelper(projectID, "PAYU_PAYMENT_CALLBACK_URL")
+			RefundWebhookURL = gcp_shared.LoadSecretsHelper(projectID, "PAYU_REFUND_WEBHOOK_URL")
 		}
 		if Key == "" {
 			log.Fatal("PAYU_KEY is not set")
@@ -49,6 +52,9 @@ func Init(projectID string) {
 		}
 		if PaymentCallbackURL == "" {
 			log.Fatal("PAYU_PAYMENT_CALLBACK_URL is not set")
+		}
+		if RefundWebhookURL == "" {
+			log.Fatal("PAYU_REFUND_WEBHOOK_URL is not set")
 		}
 		log.Println("PayU initialized successfully")
 	})
