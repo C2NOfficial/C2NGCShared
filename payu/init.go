@@ -14,6 +14,7 @@ var (
 	Furl               string
 	Surl               string
 	PaymentCallbackURL string
+	RefundInitiateAPI  string
 	RefundWebhookURL   string
 	initOnce           sync.Once
 )
@@ -26,6 +27,7 @@ func Init(projectID string) {
 			Furl = os.Getenv("PAYU_FURL")
 			Surl = os.Getenv("PAYU_SURL")
 			PaymentCallbackURL = os.Getenv("PAYU_PAYMENT_CALLBACK_URL")
+			RefundInitiateAPI = "https://test.payu.in/merchant/postservice.php?form=2"
 			RefundWebhookURL = os.Getenv("PAYU_REFUND_WEBHOOK_URL")
 		} else {
 			if projectID == "" {
@@ -36,6 +38,7 @@ func Init(projectID string) {
 			Furl = gcp_shared.LoadSecretsHelper(projectID, "PAYU_FURL")
 			Surl = gcp_shared.LoadSecretsHelper(projectID, "PAYU_SURL")
 			PaymentCallbackURL = gcp_shared.LoadSecretsHelper(projectID, "PAYU_PAYMENT_CALLBACK_URL")
+			RefundInitiateAPI = "https://info.payu.in/merchant/postservice.php?form=2"
 			RefundWebhookURL = gcp_shared.LoadSecretsHelper(projectID, "PAYU_REFUND_WEBHOOK_URL")
 		}
 		if Key == "" {
