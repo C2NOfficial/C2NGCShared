@@ -107,6 +107,10 @@ type RefundInitiationRequest struct {
 	Hash    string `json:"hash"`    // Format -> sha512(key|command|var1|salt)
 }
 
+func (rir *RefundInitiationRequest) SetHash(hash string) {
+	rir.Hash = hash
+}
+
 func (rir *RefundInitiationRequest) ToURLValues() string {
 	values := url.Values{}
 	values.Add("key", rir.Key)
