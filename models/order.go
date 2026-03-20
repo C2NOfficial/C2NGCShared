@@ -118,6 +118,10 @@ func (o *Order) SetShippingFee(shippingFee float64) {
 	o.ShippingFee = shippingFee
 }
 
+func (o *Order) SetStatus(status OrderStatus) {
+	o.Status = status
+}
+
 func (o *Order) SetCreatedAt(time time.Time) {
 	o.CreatedAt = time
 }
