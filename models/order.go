@@ -101,6 +101,7 @@ type Order struct {
 	PaymentRetryTime time.Time         `firestore:"paymentRetryTime"`
 	SearchTokens     []string          `firestore:"searchTokens"`
 	Waybill          string            `json:"waybill" firestore:"waybill"`
+	MihPayId         string            `json:"mihpayid" firestore:"mihpayid"`
 	CreatedAt        time.Time         `json:"createdAt" firestore:"createdAt"`
 	UpdatedAt        time.Time         `json:"updatedAt" firestore:"updatedAt"`
 }
