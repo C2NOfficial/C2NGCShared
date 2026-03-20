@@ -150,28 +150,26 @@ const (
 
 // Reference: https://docs.payu.in/reference/refund-status-callback
 type RefundWebhookResponse struct {
-	AdditionalValue1 *string      `json:"additionalValue1"`
-	BankARN          int64        `json:"bank_arn"`
-	RefundMode       string       `json:"refund_mode"`
-	BankRefNum       string       `json:"bank_ref_num"`
-	Key              string       `json:"key"`
-	Amount           string       `json:"amt"`
-	Remark           *string      `json:"remark"`
-	Status           RefundStatus `json:"status"`
-	Token            string       `json:"token"`
-	MihpayID         string       `json:"mihpayid"`
-	RequestID        string       `json:"request_id"`
-	MerchantTxnID    string       `json:"merchantTxnId"`
-	AdditionalValue2 *string      `json:"additionalValue2"`
-	Action           string       `json:"action"`
+	BankARN       string       `json:"bank_arn"`
+	RefundMode    string       `json:"refund_mode"`
+	BankRefNum    string       `json:"bank_ref_num"`
+	Key           string       `json:"key"`
+	Amount        string       `json:"amt"`
+	Remark        *string      `json:"remark"`
+	Status        RefundStatus `json:"status"`
+	Token         string       `json:"token"`
+	MihpayID      string       `json:"mihpayid"`
+	RequestID     string       `json:"request_id"`
+	MerchantTxnID string       `json:"merchantTxnId"`
+	Action        string       `json:"action"`
 }
 
-// Only need this to verify the refund webhook response. 
+// Only need this to verify the refund webhook response.
 // So only key, mihpayid and command are required.
 func (rwr *RefundWebhookResponse) ToRefundInitateRequest() *RefundInitiationRequest {
 	return &RefundInitiationRequest{
-		Key: Key, 
+		Key:     Key,
 		Command: "cancel_refund_transaction",
-		Var1: rwr.MihpayID,
+		Var1:    rwr.MihpayID,
 	}
 }
