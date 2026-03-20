@@ -16,14 +16,3 @@ type PaymentRequest struct {
 func (p *PaymentRequest) SetHash(hash string) {
 	p.Hash = hash
 }
-
-// No need for a separate struct to handle refunds. Status is more than 
-// enough since payU sends form encoded data to the webhook. 
-type RefundStatus string
-
-const (
-    RefundStatusInitiated    RefundStatus = "initiated"
-    RefundStatusProcessing   RefundStatus = "processing"
-    RefundStatusCompleted    RefundStatus = "money_refunded"
-    RefundStatusFailed       RefundStatus = "refund_failed"
-)
