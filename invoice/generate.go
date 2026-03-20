@@ -1,6 +1,7 @@
 package invoice
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -290,7 +291,7 @@ func Generate(data *PDFData) []byte {
 	pdf.SetXY(initialX, pdf.GetY()+12)
 	pdf.SetFont("InterBold", "", 9)
 	pdf.SetTextColor(colorRed[0], colorRed[1], colorRed[2])
-	pdf.Text("TOTAL PAID")
+	pdf.Text(fmt.Sprintf("TOTAL %s", data.PaymentText))
 
 	pdf.SetX(initialX + summaryTextToValueGap)
 	pdf.Text(data.Total)
