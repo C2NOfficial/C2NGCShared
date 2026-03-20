@@ -6,7 +6,8 @@ const (
 	PLACE_ORDER                 = "place-order"
 	UPDATE_ORDER                = "update-order"
 	TRACK_ORDER                 = "track-order"
-	ORDER_CLEANUP_CRON_JOB      = "order-cleanup-cron-job"
+	ORDER_CLEANUP_CLOUD_RUN     = "order-cleanup-cloud-run"
+	PAYU_REFUND_INITIATE        = "payu-refund-initiate"
 	PAYU_PAYMENT_CALLBACK       = "payu-payment-callback"
 	PAYU_REFUND_WEBHOOK         = "payu-refund-webhook"
 	PAYU_RETRY_PAYMENT          = "payu-retry-payment"
@@ -44,6 +45,9 @@ var Endpoints = map[string]ServiceEndpoint{
 	PAYU_RETRY_PAYMENT: {
 		Port: "4003",
 	},
+	PAYU_REFUND_INITIATE: {
+		Port: "4004",
+	},
 	GET_ESTIMATED_SHIPPING_COST: {
 		Port: "5002",
 	},
@@ -53,7 +57,7 @@ var Endpoints = map[string]ServiceEndpoint{
 	DELHIVERY_WEBHOOOK: {
 		Port: "5004",
 	},
-	ORDER_CLEANUP_CRON_JOB: {
+	ORDER_CLEANUP_CLOUD_RUN: {
 		Port: "6000",
 	},
 }
