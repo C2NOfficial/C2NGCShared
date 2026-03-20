@@ -161,3 +161,13 @@ type RefundWebhookResponse struct {
 	AdditionalValue2 *string      `json:"additionalValue2"`
 	Action           string       `json:"action"`
 }
+
+// Only need this to verify the refund webhook response. 
+// So only key, mihpayid and command are required.
+func (rwr *RefundWebhookResponse) ToRefundInitateRequest() *RefundInitiationRequest {
+	return &RefundInitiationRequest{
+		Key: Key, 
+		Command: "cancel_refund_transaction",
+		Var1: rwr.MihpayID,
+	}
+}
