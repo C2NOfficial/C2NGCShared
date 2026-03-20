@@ -40,7 +40,7 @@ func GenerateResponseHash(form url.Values) string {
 }
 
 // Reference: // Reference: https://docs.payu.in/reference/refund_transaction_api
-func GenerateRefundInitateHash(rir *RefundInitiationRequest) string {
+func GenerateRefundHash(rir *RefundInitiationRequest) string {
 	hashString := fmt.Sprintf("%s|%s|%s|%s", rir.Key, rir.Command, rir.Var1, Salt)
 	hash := sha512.Sum512([]byte(hashString))
 	return hex.EncodeToString(hash[:])
