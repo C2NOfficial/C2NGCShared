@@ -5,9 +5,9 @@ import (
 )
 
 // Stores the cost of shipment for an order
-var ShippingEstimateCache = NewCache[float64] 
+var ShippingEstimateCache = NewCache[float64]() 
 // Stores the count for each ip how many times it requested
-var IPCache = NewCache[int] 
+var IPCache = NewCache[int]()
 
 type entry[T any] struct {
 	Value T
