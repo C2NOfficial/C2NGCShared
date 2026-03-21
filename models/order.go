@@ -102,6 +102,8 @@ type Order struct {
 	SearchTokens     []string          `firestore:"searchTokens"`
 	Waybill          string            `json:"waybill" firestore:"waybill"`
 	MihPayId         string            `json:"mihpayid" firestore:"mihpayid"`
+	RefundedAmount   float64           `json:"refundedAmount" firestore:"refundedAmount"`
+	RefundReason     string            `json:"refundReason" firestore:"refundReason"`
 	CreatedAt        time.Time         `json:"createdAt" firestore:"createdAt"`
 	UpdatedAt        time.Time         `json:"updatedAt" firestore:"updatedAt"`
 }
@@ -118,7 +120,16 @@ func (o *Order) SetShippingFee(shippingFee float64) {
 	o.ShippingFee = shippingFee
 }
 
-func (o *Order) RoundOrder() {
+func (o *Order) SetRefundedAmount(amount float64) {
+	o.RefundedAmount = amount
+}
+
+func (o *Order) SetRefundReason(reason string) {
+	o.RefundReason = reason
+}
+
+// Rounds the subtoat, tax and total to 2 decimal places
+func (o *Order) Round() {
 	o.Subtotal = math.Round(o.Subtotal*100) / 100
 	o.Tax = math.Round(o.GetCalculatedTax()*100) / 100
 	o.Total = math.Round((o.Subtotal+o.Tax+o.ShippingFee)*100) / 100
