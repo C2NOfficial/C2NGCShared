@@ -2,10 +2,10 @@ package models
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 	"time"
-
 )
 
 type OrderItem struct {
@@ -116,6 +116,12 @@ func (o *Order) SetInvoiceNumber(invoiceNumber string) {
 
 func (o *Order) SetShippingFee(shippingFee float64) {
 	o.ShippingFee = shippingFee
+}
+
+func (o *Order) RoundOrder() {
+	o.Subtotal = math.Round(o.Subtotal*100) / 100
+	o.Tax = math.Round(o.GetCalculatedTax()*100) / 100
+	o.Total = math.Round((o.Subtotal+o.Tax+o.ShippingFee)*100) / 100
 }
 
 func (o *Order) SetStatus(status OrderStatus) {
