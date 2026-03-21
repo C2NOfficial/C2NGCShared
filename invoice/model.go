@@ -53,10 +53,10 @@ func NewPDFData(o *models.Order, dfc *delhivery.FirebaseConfig) *PDFData {
 		IGST = fmt.Sprintf("₹%s", o.GetFormattedTax())
 	}
 
-	//The text next to "TOTAL" in the order summary. 
+	//The text next to "TOTAL" in the order summary.
 	//Leaving it blank if the order is not paid.
 	paymentText := ""
-	if o.Status == constants.ORDER_STATUS_PAID {
+	if o.Status != constants.ORDER_STATUS_FAILED && o.Status != constants.ORDER_STATUS_CANCELLED && o.Status != constants.ORDER_STATUS_PENDING {
 		paymentText = "PAID"
 	}
 
