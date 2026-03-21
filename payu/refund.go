@@ -2,7 +2,7 @@ package payu
 
 import "net/url"
 
-// Reference: https://docs.payu.in/reference/check_action_status_api_with_payu_id
+// Reference: https://docs.payu.in/reference/error-codes-for-refund-initiation
 type RefundInitiationErrorCodes int
 
 var RefundInitiationErrorCodeMap = map[RefundInitiationErrorCodes]string{
@@ -127,8 +127,8 @@ func (rir *RefundInitiationRequest) ToURLValues() string {
 type InitiateRefundResponseStatus uint8
 
 const (
-	InitiateRefundStatusSuccess InitiateRefundResponseStatus = 0
-	InitiateRefundStatusFailure InitiateRefundResponseStatus = 1
+	InitiateRefundStatusSuccess InitiateRefundResponseStatus = 1
+	InitiateRefundStatusFailure InitiateRefundResponseStatus = 0
 )
 
 // Reference: https://docs.payu.in/reference/refund_transaction_api
