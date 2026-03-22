@@ -21,7 +21,10 @@ func ValidateAddress(address *models.Address) error {
 	address.Zip = strings.TrimSpace(address.Zip)
 	address.Country = strings.TrimSpace(address.Country)
 
-	if len(address.City) < 2 || len(address.City) > 50 {
+	if len(address.Line) < 5 || len(address.Line) > 70 {
+		return ErrInvalidAddressLine
+	}
+	if len(address.City) < 2 || len(address.City) > 20 {
 		return ErrInvalidCity
 	}
 	if !constants.StateNameMap[address.State] {
