@@ -3,6 +3,7 @@ package delhivery
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -12,7 +13,7 @@ import (
 	"github.com/C2NOfficial/C2NGCShared/models"
 )
 
-// Sends the request to the cloud function to get the estimated shipping cost. 
+// Sends the request to the cloud function to get the estimated shipping cost.
 func EstimateShippingPrice(request *ShippingEstimateRequest) (float64, error) {
 	bodyBytes, err := json.Marshal(request)
 	if err != nil {
@@ -31,15 +32,20 @@ func EstimateShippingPrice(request *ShippingEstimateRequest) (float64, error) {
 	if err != nil {
 		return 0, err
 	}
-
 	defer res.Body.Close()
-	//cloud function returns a float64 value which is the estimated shipping cost
-	var successResponse models.SuccessPayload[float64]
-
+	
 	if res.StatusCode != http.StatusOK {
-		return 0, fmt.Errorf("Unexpected status code: %d", res.StatusCode)
+		//parse the failure error from the cloud function
+		var failureResponse models.FailPayload
+		err = json.NewDecoder(res.Body).Decode(&failureResponse)
+		if err != nil {
+			return 0, err
+		}
+		return 0, errors.New(failureResponse.Message)
 	}
 
+	//Returns a float64 value which is the estimated shipping cost
+	var successResponse models.SuccessPayload[float64]
 	err = json.NewDecoder(res.Body).Decode(&successResponse)
 	if err != nil {
 		return 0, err
