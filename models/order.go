@@ -61,7 +61,7 @@ func (oi *OrderItem) ToFailedStockReset(error string) *FailedStockReset {
 func (oi *OrderItem) ToBestSellerItem() *BestSellerItem {
 	return &BestSellerItem{
 		ID:    fmt.Sprintf("%s_%s", oi.ProductId, oi.GetSize()),
-		Count: oi.Quantity,
+		Count: int64(oi.Quantity),
 	}
 }
 
