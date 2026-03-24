@@ -45,7 +45,7 @@ func HandleStockReset(ctx context.Context, order *models.Order) []*models.Failed
 	return stockResetErrors
 }
 
-func UpdateBestSeller(ctx context.Context, items []models.OrderItem) []string {
+func UpdateBestSeller(ctx context.Context, items []*models.OrderItem) []string {
 	if len(items) == 0 {
 		return nil
 	}
