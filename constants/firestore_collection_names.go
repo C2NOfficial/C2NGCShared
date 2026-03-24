@@ -6,4 +6,5 @@ const (
 	COLLECTION_NAME_ORDERS           = "orders"
 	COLLECTION_NAME_DELHIVERY_CONFIG = "delhiveryconfig"
 	COLLECTION_NAME_COUNTERS         = "counters"
+	COLLECTION_NAME_BEST_SELLERS     = "bestsellers"
 )

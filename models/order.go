@@ -58,6 +58,17 @@ func (oi *OrderItem) ToFailedStockReset(error string) *FailedStockReset {
 	}
 }
 
+func (oi *OrderItem) ToBestSellerItem() *BestSellerItem {
+	return &BestSellerItem{
+		ID:    fmt.Sprintf("%s_%s", oi.ProductId, oi.GetSize()),
+		Count: oi.Quantity,
+	}
+}
+
+func (oi *OrderItem) GetIDWithSize() string {
+	return fmt.Sprintf("%s_%s", oi.ProductId, oi.GetSize())
+}
+
 type CustomizationSelected struct {
 	Id    string           `json:"id" firestore:"id"`
 	Name  string           `json:"name" firestore:"name"`
