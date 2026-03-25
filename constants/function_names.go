@@ -14,6 +14,7 @@ const (
 	GET_ESTIMATED_SHIPPING_COST = "get-estimated-shipping-cost"
 	CREATE_DELHIVERY_SHIPMENT   = "create-delhivery-shipment"
 	DELHIVERY_WEBHOOOK          = "delhivery-webhook"
+	SINGLE_PRODUCT_RENDER       = "single-product-renderer"
 )
 
 type ServiceEndpoint struct {
@@ -32,9 +33,6 @@ var Endpoints = map[string]ServiceEndpoint{
 	},
 	PLACE_ORDER: {
 		Port: "3005",
-	},
-	TRACK_ORDER: {
-		Port: "3006",
 	},
 	PAYU_PAYMENT_CALLBACK: {
 		Port: "4000",
@@ -57,8 +55,14 @@ var Endpoints = map[string]ServiceEndpoint{
 	DELHIVERY_WEBHOOOK: {
 		Port: "5004",
 	},
+	TRACK_ORDER: {
+		Port: "5005",
+	},
 	ORDER_CLEANUP_CLOUD_RUN: {
 		Port: "6000",
+	},
+	SINGLE_PRODUCT_RENDER: {
+		Port: "6001",
 	},
 }
 
