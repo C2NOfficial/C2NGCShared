@@ -25,6 +25,11 @@ func SendEmail(ctx context.Context, ep *Payload) {
 		Attachment: ep.Attachments,
 	}
 
+	//Unblock contacts if it was previously blocked (unsubscribed emails)
+	for _, contact := range ep.To {
+		unblockContact(contact.Email)
+	}
+
 	_, resp, err := Client.TransactionalEmailsApi.SendTransacEmail(ctx, sendSmtpEmail)
 	if err != nil {
 		gcp_shared.LogError("BREVO MAIL ERROR", "Error occurred while sending the brevo email")
