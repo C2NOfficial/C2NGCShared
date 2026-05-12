@@ -15,6 +15,7 @@ const (
 	CREATE_DELHIVERY_SHIPMENT   = "create-delhivery-shipment"
 	DELHIVERY_WEBHOOOK          = "delhivery-webhook"
 	SINGLE_PRODUCT_RENDER       = "single-product-renderer"
+	ADD_TO_BREVO_CONTACT_LIST   = "add-to-brevo-contact-list"
 )
 
 type ServiceEndpoint struct {
