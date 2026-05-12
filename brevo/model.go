@@ -14,3 +14,10 @@ type Payload struct {
 func (ep *Payload) AddAttachment(attachment brevo_official.SendSmtpEmailAttachment) {
 	ep.Attachments = append(ep.Attachments, attachment)
 }
+
+type AddContactPayload struct {
+	Email         string                 `json:"email"`
+	ListIds       []int                  `json:"listIds"`
+	UpdateEnabled bool                   `json:"updateEnabled"`
+}
+
