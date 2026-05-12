@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"time"
 )
@@ -41,10 +42,16 @@ func AddToContactList(email string) error {
 	if err != nil {
 		return err
 	}
+	
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusCreated && resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("brevo API error: status %s, body: %s", resp.Status, string(body))
+		return fmt.Errorf("brevo API error: status %s, body: %s", resp.Status, string(respBody))
 	}
 
 	return nil
