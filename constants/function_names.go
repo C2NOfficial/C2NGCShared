@@ -65,6 +65,9 @@ var Endpoints = map[string]ServiceEndpoint{
 	SINGLE_PRODUCT_RENDER: {
 		Port: "6001",
 	},
+	ADD_TO_BREVO_CONTACT_LIST: {
+		Port: "6002",
+	},
 }
 
 // Helpful while debugging
