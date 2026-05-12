@@ -16,7 +16,7 @@ const (
 func AddToContactList(email string) error {
 	payload := AddContactPayload{
 		Email:         email,
-		ListIds:       []int{6}, 
+		ListIds:       []int{6},
 		UpdateEnabled: true,
 	}
 
@@ -42,7 +42,7 @@ func AddToContactList(email string) error {
 	if err != nil {
 		return err
 	}
-	
+
 	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return err
@@ -50,7 +50,9 @@ func AddToContactList(email string) error {
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusCreated && resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusCreated &&
+		resp.StatusCode != http.StatusOK &&
+		resp.StatusCode != http.StatusNoContent {
 		return fmt.Errorf("brevo API error: status %s, body: %s", resp.Status, string(respBody))
 	}
 
