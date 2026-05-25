@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"fmt"
 	"math"
 	"strconv"
@@ -372,4 +373,9 @@ type OrderPaymentEvent struct {
     Txnid     string `json:"txnid"`
     MihPayID  string `json:"mihpayid"`
     Status    string `json:"status"`
+}
+
+func (ope *OrderPaymentEvent) ToByte() []byte {
+	b, _ := json.Marshal(ope)
+	return b
 }
