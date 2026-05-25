@@ -365,3 +365,11 @@ func (o *Order) ConvertToPDFItems() [][]string {
 	}
 	return pdfItems
 }
+
+//Pub sub stream object for order failed or success (after payment)
+type OrderPaymentEvent struct {
+    OrderID   string `json:"orderId"`
+    Txnid     string `json:"txnid"`
+    MihPayID  string `json:"mihpayid"`
+    Status    string `json:"status"`
+}
