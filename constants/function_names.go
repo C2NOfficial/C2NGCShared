@@ -16,6 +16,8 @@ const (
 	DELHIVERY_WEBHOOOK          = "delhivery-webhook"
 	SINGLE_PRODUCT_RENDER       = "single-product-renderer"
 	ADD_TO_BREVO_CONTACT_LIST   = "add-to-brevo-contact-list"
+	ORDER_PAID_CONSUMER         = "order-paid-consumer"
+	ORDER_FAILED_CONSUMER       = "order-failed-consumer"
 )
 
 type ServiceEndpoint struct {
@@ -67,6 +69,12 @@ var Endpoints = map[string]ServiceEndpoint{
 	},
 	ADD_TO_BREVO_CONTACT_LIST: {
 		Port: "6002",
+	},
+	ORDER_PAID_CONSUMER: {
+		Port: "6003",
+	},
+	ORDER_FAILED_CONSUMER: {
+		Port: "6004",
 	},
 }
 
