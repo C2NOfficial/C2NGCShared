@@ -8,7 +8,6 @@ import (
 	"os"
 	"sync"
 
-	"cloud.google.com/go/compute/metadata"
 	"cloud.google.com/go/pubsub/v2"
 )
 
@@ -17,17 +16,14 @@ var (
 	initPubSubOnce sync.Once
 )
 
-func InitPubSub(ctx context.Context) {
+func InitPubSub(ctx context.Context, projectIDWithContext string) {
 	var err error
 	var projectID string
 	initPubSubOnce.Do(func() {
 		if os.Getenv("ENV") == "DEBUG" {
 			projectID = os.Getenv("GCP_PROJECT_ID")
 		} else {
-			projectID, err = metadata.ProjectIDWithContext(ctx)
-			if err != nil {
-				log.Fatalf("No project id found for the GCP project: %v", err)
-			}
+			projectID = projectIDWithContext
 		}
 		PubSubClient, err = pubsub.NewClient(ctx, projectID)
 		if err != nil {
